@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
 
     if (email.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter both email and password.')),
+        SnackBar(content: Text('Please enter both email and password.')),
       );
       return;
     }
@@ -54,7 +54,7 @@ class _HomeState extends State<Home> {
 
     ScaffoldMessenger.of(
       context,
-    ).showSnackBar(const SnackBar(content: Text('Credentials saved to Hive.')));
+    ).showSnackBar(SnackBar(content: Text('Credentials saved to Hive.')));
   }
 
   void clearCredentials() {
@@ -70,7 +70,7 @@ class _HomeState extends State<Home> {
 
     ScaffoldMessenger.of(
       context,
-    ).showSnackBar(const SnackBar(content: Text('Credentials cleared.')));
+    ).showSnackBar(SnackBar(content: Text('Credentials cleared.')));
   }
 
   String maskedPassword(String? pwd) {
@@ -81,70 +81,69 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Email & Password (Hive)')),
+      appBar: AppBar(title: Text('Email & Password (Hive)')),
       body: Center(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Email',
                   border: OutlineInputBorder(),
                 ),
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               TextField(
                 controller: passwordController,
                 obscureText: true,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Password',
                   border: OutlineInputBorder(),
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: ElevatedButton(
                       onPressed: saveCredentials,
-                      child: const Text('Save'),
+                      child: Text('Save'),
                     ),
                   ),
-                  const SizedBox(width: 8),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
+                  SizedBox(width: 8),
                   Expanded(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.redAccent,
                       ),
                       onPressed: clearCredentials,
-                      child: const Text('Clear'),
+                      child: Text('Clear'),
                     ),
                   ),
                 ],
               ),
-              // Note: explicit "Load" functionality removed as requested. Saved values are
-              // read on init (if present) and can be updated via Save / cleared via Clear.
-              const SizedBox(height: 20),
+
+              SizedBox(height: 20),
               if (savedEmail != null || savedPassword != null) ...[
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Saved Email: ${savedEmail ?? ''}',
-                    style: const TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: 16),
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Saved Password: ${maskedPassword(savedPassword)}',
-                    style: const TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: 16),
                   ),
                 ),
               ],
