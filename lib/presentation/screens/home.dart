@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'presentation/screens/todo_page.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -111,19 +112,17 @@ class _HomeState extends State<Home> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: saveCredentials,
-                      child: Text('Save'),
-                    ),
-                  ),
-                  SizedBox(width: 8),
-                  SizedBox(width: 8),
-                  Expanded(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.redAccent,
-                      ),
-                      onPressed: clearCredentials,
-                      child: Text('Clear'),
+                      onPressed: () {
+                        saveCredentials();
+                        // After saving credentials, navigate to todo page
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (c) =>
+                                TodoPage(username: emailController.text.trim()),
+                          ),
+                        );
+                      },
+                      child: Text('Login'),
                     ),
                   ),
                 ],
